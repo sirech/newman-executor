@@ -10,4 +10,9 @@ describe 'Container' do
       its(:stdout) { is_expected.to match(/12.6/) }
     end
   end
+
+  describe file('/usr/local/bin/newman') do
+    it { is_expected.to be_file }
+    it { is_expected.to be_executable }
+  end
 end
