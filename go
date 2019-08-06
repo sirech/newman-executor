@@ -10,7 +10,7 @@ SCRIPT_DIR=$(cd "$(dirname "$0")" ; pwd -P)
 source "${SCRIPT_DIR}/go.variables"
 
 goal_containerize() {
-  docker build . -t $IMAGE
+  docker build . --build-arg TAG=${TAG} -t "${IMAGE}"
 }
 
 goal_test-container() {
@@ -19,14 +19,19 @@ goal_test-container() {
   bundle exec rspec spec
 }
 
+goal_publish() {
+  docker tag "${IMAGE_NAME}" "${IMAGE_NAME}:${TAG}"
+  docker push "${IMAGE_NAME}:${TAG}"
+}
+
 goal_help() {
   echo "usage: $0 <goal>
 
     goal:
 
     containerize             -- Build the docker container
-
     test-container           -- Run container tests
+    publish                  -- Publish the image to the hub
     "
   exit 1
 }
