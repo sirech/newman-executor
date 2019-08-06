@@ -1,0 +1,18 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: sirech/dind-ruby:2.6.3
+
+    steps:
+      - run:
+          name: Setup variables
+          command: |
+            echo 'export IMAGE_NAME=$DOCKER_USER/newman-executor' >> $BASH_ENV
+
+      - checkout
+      - setup_remote_docker
+      - run: ./go containerize
+      - run: ./go test-container
+      - run: echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
+      - run: ./go publish
