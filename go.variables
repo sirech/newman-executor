@@ -4,5 +4,5 @@ set -e
 set -o nounset
 set -o pipefail
 
-export IMAGE=${IMAGE:-newman-executor}
+export IMAGE_NAME=${IMAGE_NAME:-newman-executor}
 export TAG=12.6

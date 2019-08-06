@@ -10,7 +10,7 @@ SCRIPT_DIR=$(cd "$(dirname "$0")" ; pwd -P)
 source "${SCRIPT_DIR}/go.variables"
 
 goal_containerize() {
-  docker build . --build-arg TAG=${TAG} -t "${IMAGE}"
+  docker build . --build-arg TAG=${TAG} -t "${IMAGE_NAME}"
 }
 
 goal_test-container() {
