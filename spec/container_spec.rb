@@ -11,8 +11,14 @@ describe 'Container' do
     end
   end
 
-  describe file('/usr/local/bin/newman') do
-    it { is_expected.to be_file }
-    it { is_expected.to be_executable }
+  [
+    '/bin/bash',
+    '/usr/bin/envsubst',
+    '/usr/local/bin/newman'
+  ].each do |executable|
+    describe file(executable) do
+      it { is_expected.to be_file }
+      it { is_expected.to be_executable }
+    end
   end
 end
