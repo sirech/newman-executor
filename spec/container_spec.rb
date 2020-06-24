@@ -15,7 +15,8 @@ describe 'Container' do
     '/bin/bash',
     '/usr/bin/envsubst',
     '/usr/local/bin/newman',
-    '/usr/bin/git'
+    '/usr/bin/git',
+    '/usr/bin/ssh'
   ].each do |executable|
     describe file(executable) do
       it { is_expected.to be_file }

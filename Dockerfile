@@ -3,5 +3,5 @@ FROM node:${TAG}-alpine
 
 RUN npm i -g newman
 
-RUN apk add --update --no-cache bash gettext git \
+RUN apk add --update --no-cache bash gettext git openssh-client \
   && rm -rf /var/cache/apk/*
