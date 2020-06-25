@@ -16,3 +16,4 @@ jobs:
       - run: ./go test-container
       - run: echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
       - run: ./go publish
+      - run: TAG=latest ./go publish
