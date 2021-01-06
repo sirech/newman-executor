@@ -7,7 +7,7 @@ describe 'Container' do
 
   describe 'node' do
     describe command('node -v') do
-      its(:stdout) { is_expected.to match(/14.4/) }
+      its(:stdout) { is_expected.to match(/15.5/) }
     end
   end
 
