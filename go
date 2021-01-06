@@ -24,25 +24,27 @@ goal_publish() {
   docker push "${IMAGE_NAME}:${TAG}"
 }
 
-goal_help() {
-  echo "usage: $0 <goal>
+validate-args() {
+  acceptable_args="$(declare -F | sed -n "s/declare -f goal_//p" | tr '\n' ' ')"
 
-    goal:
+  if [[ -z $1 ]]; then
+    echo "usage: $0 <goal>"
+    # shellcheck disable=SC2059
+    printf "\n$(declare -F | sed -n "s/declare -f goal_/ - /p")"
+    exit 1
+  fi
 
-    containerize             -- Build the docker container
-    test-container           -- Run container tests
-    publish                  -- Publish the image to the hub
-    "
-  exit 1
-}
-
-main() {
-  TARGET=${1:-}
-  if [ -n "${TARGET}" ] && type -t "goal_$TARGET" &>/dev/null; then
-    "goal_$TARGET" "${@:2}"
-  else
-    goal_help
+  if [[ ! " $acceptable_args " =~ .*\ $1\ .* ]]; then
+    echo "Invalid argument: $1"
+    # shellcheck disable=SC2059
+    printf "\n$(declare -F | sed -n "s/declare -f goal_/ - /p")"
+    exit 1
   fi
 }
 
-main "$@"
+CMD=${1:-}
+shift || true
+if validate-args "${CMD}"; then
+  "goal_${CMD}"
+  exit 0
+fi
