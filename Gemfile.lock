@@ -51,13 +51,13 @@ GEM
       rubocop (~> 1.0)
       rubocop-ast (>= 1.1.0)
     ruby-progressbar (1.11.0)
-    serverspec (2.41.5)
+    serverspec (2.41.8)
       multi_json
       rspec (~> 3.0)
       rspec-its
       specinfra (~> 2.72)
     sfl (2.3)
-    specinfra (2.82.23)
+    specinfra (2.82.25)
       net-scp
       net-ssh (>= 2.7)
       net-telnet (= 0.1.1)
